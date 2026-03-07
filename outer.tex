@@ -7,7 +7,6 @@
 \usepackage[margin=1cm]{geometry}
 
 \usepackage{array, calc, expl3, fontspec, graphicx, multicol, tcolorbox, xcolor, xifthen}
-\usepackage{zhnumber}
 
 % Use Hong Kong variant of Traditional Chinese
 \typeout{*** PrintMode = \PrintMode ***}
@@ -25,7 +24,7 @@
 
 %\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
 \newcommand{\StrokeCount}[1]{%
-  \Character{\textcolor{gray}{\chinese{#1}}}{}{}{}{}%
+  \Character{\textcolor{gray!95}{#1}}{}{}{}{}%
 }
 
 % Select romanization form based on PrintMode
@@ -40,16 +39,16 @@
 \newcommand{\Character}[5]{%
   \begin{minipage}[t]{\linewidth}%
     \centering
-    \resizebox{!}{0.74\linewidth}{%
+    \resizebox{!}{0.73\linewidth}{%
       \phantom{龠}%
       \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
     }\par\vspace{2pt}%
     \ifthenelse{\equal{#2}{}}%
-      {{\tiny\strut}\par}%
-      {\resizebox{!}{\heightof{{\tiny\strut Xg}}}{{\tiny #2}}\par}%
-    {\small\strut \RomanizationForm{#4}{#5}}\par%
+      {{\fontsize{5}{5}\selectfont\strut}\par}%
+      {\resizebox{!}{\heightof{{\fontsize{5}{5}\selectfont\strut Xg}}}{{\fontsize{5}{5}\selectfont #2}}\par}%
+    {\fontsize{7}{7}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
     \begin{minipage}[t][0pt]{\linewidth}%
-      \centering{\tiny #3}%
+      \centering{\fontsize{5}{5}\selectfont #3}%
     \end{minipage}%
   \end{minipage}%
   \par\vspace{4pt}%
@@ -64,18 +63,18 @@
   arc=0pt,
   colback=white,
   colframe=black,
-  left=0pt, right=0pt, top=0pt, bottom=0pt,
+  left=0pt, right=0pt, top=0pt, bottom=4pt,
   valign=top
 }
 \noindent
-\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
+\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.25cm\relax, nobeforeafter, box align=top]
 \begin{multicols}{8}
 \input{Radicals-Left.tex}
 \vfill
 \end{multicols}
 \end{tcolorbox}%
 \hspace{1cm}%
-\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
+\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.25cm\relax, nobeforeafter, box align=top]
 \begin{multicols}{8}
 \input{Radicals-Right.tex}
 \vfill
