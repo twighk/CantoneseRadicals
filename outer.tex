@@ -11,8 +11,18 @@
 % Use Hong Kong variant of Traditional Chinese
 \typeout{*** PrintMode = \PrintMode ***}
 \typeout{*** FontChoice = \FontChoice ***}
-\setmainfont{\FontChoice}[]
-
+\setmainfont{\FontChoice}[
+  BoldFont={},
+  FallbackFonts={
+    {AR PL UKai HK},
+    {AR PL UMing HK},
+    {Noto Sans CJK HK},
+    {Noto Serif CJK HK},
+    {Source Han Serif HK},
+    {LastResort}
+  }
+]
+\tracinglostchars=0
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1pt}
 \setlength{\columnsep}{4pt}
