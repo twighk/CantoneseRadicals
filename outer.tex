@@ -6,7 +6,18 @@
 \documentclass[a3paper]{article}
 \usepackage[margin=0.5cm, nohead, nofoot]{geometry}
 
-\usepackage{array, calc, expl3, fontspec, graphicx, hyperref, multicol, qrcode, tcolorbox, xcolor, xifthen}
+\usepackage{array, calc, expl3, fontspec, graphicx, multicol, qrcode, tcolorbox, xcolor, xifthen}
+
+\usepackage[
+  hidelinks,
+  pdftitle={The 214 Cantonese Radicals},
+  pdfauthor={T. Branch},
+  pdfsubject={Cantonese Radicals Reference Poster},
+  pdfkeywords={Cantonese, Chinese, Radicals, Jyutping, Yale}
+  pdfcreator={XeLaTeX},
+  pdfinfo={https://github.com/twighk/CantoneseRadicals},
+  pdflang={zh-HK}
+]{hyperref}
 
 % Use Hong Kong variant of Traditional Chinese
 \typeout{*** PrintMode = \PrintMode ***}
