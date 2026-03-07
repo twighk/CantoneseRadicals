@@ -34,8 +34,8 @@ def write_radicals():
                     f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}\n"
                 )
 
-    out_rounded_to_80 = (len(out) + 79) // 80 * 80
-    half = out_rounded_to_80 // 2
+    out_rounded_to_8 = (len(out) + 7)
+    half = out_rounded_to_8 // 2 + 1
     with open(RADICALS_LEFT_TEX, 'w', encoding='utf-8') as f:
         for line in out[:half]:
             f.write(line)
@@ -43,6 +43,8 @@ def write_radicals():
     with open(RADICALS_RIGHT_TEX, 'w', encoding='utf-8') as f:
         for line in out[half:]:
             f.write(line)
+        for _ in range(len(out), out_rounded_to_8 +2):
+            f.write(r"\Character{}{}{}{}{}")  # pad to a multiple of 8
 
 if __name__ == '__main__':
     write_radicals()

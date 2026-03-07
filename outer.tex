@@ -7,6 +7,7 @@
 \usepackage[margin=1cm]{geometry}
 
 \usepackage{array, calc, expl3, fontspec, graphicx, multicol, tcolorbox, xcolor, xifthen}
+\usepackage{zhnumber}
 
 % Use Hong Kong variant of Traditional Chinese
 \typeout{*** PrintMode = \PrintMode ***}
@@ -24,7 +25,7 @@
 
 %\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
 \newcommand{\StrokeCount}[1]{%
-  \Character{#1}{}{}{}{}%
+  \Character{\textcolor{gray}{\chinese{#1}}}{}{}{}{}%
 }
 
 % Select romanization form based on PrintMode
@@ -39,11 +40,13 @@
 \newcommand{\Character}[5]{%
   \begin{minipage}[t]{\linewidth}%
     \centering
-    \resizebox{!}{0.8\linewidth}{%
+    \resizebox{!}{0.74\linewidth}{%
       \phantom{龠}%
       \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
     }\par\vspace{2pt}%
-    {\tiny\strut #2}\par%
+    \ifthenelse{\equal{#2}{}}%
+      {{\tiny\strut}\par}%
+      {\resizebox{!}{\heightof{{\tiny\strut Xg}}}{{\tiny #2}}\par}%
     {\small\strut \RomanizationForm{#4}{#5}}\par%
     \begin{minipage}[t][0pt]{\linewidth}%
       \centering{\tiny #3}%
@@ -54,26 +57,29 @@
 
 \begin{document}
 \maketitle
-\noindent
+
 % Equal-height framed boxes with inner margin, separated by \columnsep
 \tcbset{
-  boxrule=0.4pt,       % border thickness
-  arc=0pt,             % sharp corners
+  boxrule=0.4pt,
+  arc=0pt,
   colback=white,
   colframe=black,
-  left=4pt, right=4pt, top=4pt, bottom=4pt,  % inner padding
-  height=\textheight-\baselineskip,           % same fixed height
+  left=0pt, right=0pt, top=0pt, bottom=0pt,
   valign=top
 }
-\begin{tcolorbox}[width=0.49\textwidth, nobeforeafter, box align=top]
+\noindent
+\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
 \begin{multicols}{8}
 \input{Radicals-Left.tex}
+\vfill
 \end{multicols}
 \end{tcolorbox}%
-\hfill%
-\begin{tcolorbox}[width=0.49\textwidth, nobeforeafter, box align=top]
+\hspace{1cm}%
+\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
 \begin{multicols}{8}
 \input{Radicals-Right.tex}
+\vfill
 \end{multicols}
 \end{tcolorbox}
+
 \end{document}
