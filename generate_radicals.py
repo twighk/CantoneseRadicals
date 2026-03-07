@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the `Radicals.tex` file from `Radicals.csv`.
+r"""Generate the `Radicals.tex` file from `Radicals.csv`.
 
 This script does *not* create any surrounding document; the LaTeX driver
 is expected to live in a separate (hand‑maintained) file that \input s
@@ -11,13 +11,14 @@ changes, so it simply overwrites `Radicals.tex` each time it runs.
 import csv
 
 CSV_PATH = 'Radicals.csv'
-RADICALS_TEX = 'Radicals.tex'
+RADICALS_LEFT_TEX = 'Radicals-left.tex'
+RADICALS_RIGHT_TEX = 'Radicals-right.tex'
 
 
 def write_radicals():
     """Read the CSV and emit a TeX file with the two macros."""
-    with open(CSV_PATH, newline='', encoding='utf-8') as csvfile, \
-         open(RADICALS_TEX, 'w', encoding='utf-8') as out:
+    out = []
+    with open(CSV_PATH, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
             count = row.get('STROKE COUNT', '').strip()
@@ -27,12 +28,19 @@ def write_radicals():
             jy = row.get('JYUTPING', '').strip()
             yale = row.get('Yale', '').strip()
             if count:
-                out.write(f"\\StrokeCount{{{count}}}\n")
+                out.append(f"\\StrokeCount{{{count}}}\n")
             if rad:
-                out.write(
+                out.append(
                     f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}\n"
                 )
 
+    with open(RADICALS_LEFT_TEX, 'w', encoding='utf-8') as f:
+        for line in out[:len(out) // 2]:
+            f.write(line)
+
+    with open(RADICALS_RIGHT_TEX, 'w', encoding='utf-8') as f:
+        for line in out[len(out) // 2:]:
+            f.write(line)
 
 if __name__ == '__main__':
     write_radicals()
