@@ -1,0 +1,288 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2026/dev/Arch Linux) (preloaded format=xelatex 2026.3.7)  7 MAR 2026 09:21
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**outer.tex
+(./outer.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count192
+\c@section=\count193
+\c@subsection=\count194
+\c@subsubsection=\count195
+\c@paragraph=\count196
+\c@subparagraph=\count197
+\c@figure=\count198
+\c@table=\count199
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+(/usr/share/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-01-18 L3 programming layer (loader) 
+
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
+\g__graphics_track_int=\count266
+\l__pdf_internal_box=\box52
+\g__pdf_backend_annotation_int=\count267
+\g__pdf_backend_link_int=\count268
+))
+Package: xparse 2024-08-16 L3 Experimental document command parser
+)
+Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+
+(/usr/share/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count269
+\l__fontspec_language_int=\count270
+\l__fontspec_strnum_int=\count271
+\l__fontspec_tmp_int=\count272
+\l__fontspec_tmpa_int=\count273
+\l__fontspec_tmpb_int=\count274
+\l__fontspec_tmpc_int=\count275
+\l__fontspec_em_int=\count276
+\l__fontspec_emdef_int=\count277
+\l__fontspec_strong_int=\count278
+\l__fontspec_strongdef_int=\count279
+\l__fontspec_tmpa_dim=\dimen142
+\l__fontspec_tmpb_dim=\dimen143
+\l__fontspec_tmpc_dim=\dimen144
+
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/share/texmf-dist/tex/latex/xifthen/xifthen.sty
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
+
+(/usr/share/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count280
+\calc@Bcount=\count281
+\calc@Adimen=\dimen145
+\calc@Bdimen=\dimen146
+\calc@Askip=\skip51
+\calc@Bskip=\skip52
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count282
+\calc@Cskip=\skip53
+)
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
+Package: ifmtarg 2018/04/16 v1.2b check for an empty argument
+))
+(/usr/share/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen147
+\ar@mcellbox=\box53
+\extrarowheight=\dimen148
+\NC@list=\toks17
+\extratabsurround=\skip54
+\backup@length=\skip55
+\ar@cellbox=\box54
+)
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "Noto Sans CJK HK/I" (it
+(fontspec)             probably doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'NotoSansCJKHK(0)' created for font 'Noto
+(fontspec)             Sans CJK HK' with options
+(fontspec)             [Ligatures=TeX,SizeFeatures={Size=11}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <11>"Noto Sans CJK
+(fontspec)             HK/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Noto Sans CJK
+(fontspec)             HK/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Noto Sans
+(fontspec)             CJK
+(fontspec)             HK/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+
+
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <10> not avail
+able
+(Font)              size <11> substituted on input line 13.
+
+(build/outer.aux)
+\openout1 = `outer.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+
+Package fontspec Info: 
+(fontspec)             Adjusting the maths setup (use [no-math] to avoid
+(fontspec)             this).
+
+\symlegacymaths=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 30.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 30.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 30.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 30.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 30.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 30.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 30.
+LaTeX Font Info:    Redeclaring math accent \check on input line 30.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 30.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 30.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 30.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 30.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/NotoSansCJKHK(0)/m/n on input line 3
+0.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/NotoSansCJKHK(0)/m/n on input line 
+30.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/NotoSansCJKHK(0)/m/n --> TU/NotoSansCJKHK(0)/m/n on 
+input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/NotoSansCJKHK(0)/m/it on input line
+ 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/NotoSansCJKHK(0)/b/n on input line 
+30.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/NotoSansCJKHK(0)/m/n --> TU/NotoSansCJKHK(0)/b/n on 
+input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/NotoSansCJKHK(0)/b/it on input lin
+e 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 30.
+
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <17.28> not av
+ailable
+(Font)              size <11> substituted on input line 31.
+
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <12> not avail
+able
+(Font)              size <11> substituted on input line 31.
+
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <8> not availa
+ble
+(Font)              size <11> substituted on input line 31.
+
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <6> not availa
+ble
+(Font)              size <11> substituted on input line 31.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 31.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 31.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 31.
+(./Radicals.tex
+
+LaTeX Font Warning: Font shape `TU/NotoSansCJKHK(0)/m/n' in size <14.4> not ava
+ilable
+(Font)              size <11> substituted on input line 1.
+
+
+Overfull \hbox (10.03053pt too wide) in paragraph at lines 33--64
+\TU/NotoSansCJKHK(0)/b/n/10 口 \TU/NotoSansCJKHK(0)/m/n/11 (mouth, hau2)   \TU/N
+otoSansCJKHK(0)/b/n/10 囗 \TU/NotoSansCJKHK(0)/m/n/11 (enclosure, wai4)   \TU/No
+toSansCJKHK(0)/b/n/10 土 \TU/NotoSansCJKHK(0)/m/n/11 (earth, tou2)   \TU/NotoSan
+sCJKHK(0)/b/n/10 士 \TU/NotoSansCJKHK(0)/m/n/11 (scholar,
+ []
+
+
+
+[1
+
+]
+Overfull \hbox (0.64388pt too wide) in paragraph at lines 100--123
+\TU/NotoSansCJKHK(0)/m/n/11 kei4)   \TU/NotoSansCJKHK(0)/b/n/10 禸 \TU/NotoSansC
+JKHK(0)/m/n/11 (track, jau5)   \TU/NotoSansCJKHK(0)/b/n/10 禾 \TU/NotoSansCJKHK(
+0)/m/n/11 (grain, wo4)   \TU/NotoSansCJKHK(0)/b/n/10 穴 \TU/NotoSansCJKHK(0)/m/n
+/11 (cave, jyut6)   \TU/NotoSansCJKHK(0)/b/n/10 立 \TU/NotoSansCJKHK(0)/m/n/11 (
+stand,
+ []
+
+
+
+[2]
+
+[3])
+
+[4] (build/outer.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 6.28pt have occurred.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 3231 strings out of 475848
+ 101742 string characters out of 5776014
+ 523593 words of memory out of 5000000
+ 26177 multiletter control sequences out of 15000+600000
+ 561661 words of font info for 56 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 79i,5n,93p,247b,248s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on outer.pdf (4 pages).

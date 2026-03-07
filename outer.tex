@@ -1,0 +1,36 @@
+% outer.tex - user-maintained driver document for Cantonese radicals
+% Supports multiple romanization schemes via -usepretex variable
+% Uses Hong Kong font variants for Traditional Chinese characters
+
+
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{xifthen}
+\usepackage{array}
+
+% Noto Sans CJK HC = Hong Kong variant of Traditional Chinese
+%\setmainfont{Noto Sans CJK HK}[SizeFeatures={Size=11}]
+\setmainfont{Noto Serif CJK HK}[SizeFeatures={Size=11}]
+%\setmainfont{Source Han Serif HK}[SizeFeatures={Size=11}]
+
+\title{Chinese Radicals with \PrintMode 過}
+
+\author{}
+\date{}
+
+\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
+
+% Select romanization form based on PrintMode
+\ifthenelse{\equal{\PrintMode}{Yale}}%
+  {\newcommand{\RomanizationForm}[2]{#2}}%
+  {\newcommand{\RomanizationForm}[2]{#1}}
+
+% Character macro: #1=radical, #2=variant, #3=english, #4=jyutping, #5=yale
+\newcommand{\Character}[5]{\textbf{#1} (#3, \RomanizationForm{#4}{#5}) \quad}
+
+\begin{document}
+\maketitle
+
+\input{Radicals.tex}
+
+\end{document}
