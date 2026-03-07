@@ -34,12 +34,14 @@ def write_radicals():
                     f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}\n"
                 )
 
+    out_rounded_to_80 = (len(out) + 79) // 80 * 80
+    half = out_rounded_to_80 // 2
     with open(RADICALS_LEFT_TEX, 'w', encoding='utf-8') as f:
-        for line in out[:len(out) // 2]:
+        for line in out[:half]:
             f.write(line)
 
     with open(RADICALS_RIGHT_TEX, 'w', encoding='utf-8') as f:
-        for line in out[len(out) // 2:]:
+        for line in out[half:]:
             f.write(line)
 
 if __name__ == '__main__':

@@ -33,29 +33,23 @@
   {\newcommand{\RomanizationForm}[2]{#1}}
 
 % Character macro: #1=radical, #2=variant, #3=english, #4=jyutping, #5=yale
-\newlength{\CharHeight}
 \newsavebox{\CharProto}
 \sbox{\CharProto}{龠}
 
 \newcommand{\Character}[5]{%
-  \setlength{\CharHeight}{0.8\linewidth}%
-  \addtolength{\CharHeight}{2pt}%
-  \addtolength{\CharHeight}{\heightof{{\tiny Xg}}}%
-  \addtolength{\CharHeight}{\heightof{{\scriptsize Xg}}}%
-  \addtolength{\CharHeight}{\heightof{{\scriptsize Xg}}}%
-  \addtolength{\CharHeight}{6pt}%
-  \begin{minipage}[t][\CharHeight][t]{\linewidth}%
+  \begin{minipage}[t]{\linewidth}%
     \centering
     \resizebox{!}{0.8\linewidth}{%
       \phantom{龠}%
       \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
-    }%
-    \par\vspace{2pt}%
-    {\tiny #2}\par%
-    {\scriptsize #3}\par%
-    {\scriptsize \RomanizationForm{#4}{#5}}%
+    }\par\vspace{2pt}%
+    {\tiny\strut #2}\par%
+    {\small\strut \RomanizationForm{#4}{#5}}\par%
+    \begin{minipage}[t][0pt]{\linewidth}%
+      \centering{\tiny #3}%
+    \end{minipage}%
   \end{minipage}%
-  \par\vspace{2pt}%
+  \par\vspace{4pt}%
 }
 
 \begin{document}
