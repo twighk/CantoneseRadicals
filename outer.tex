@@ -39,16 +39,16 @@
 \newcommand{\Character}[5]{%
   \begin{minipage}[t]{\linewidth}%
     \centering
-    \resizebox{!}{0.73\linewidth}{%
+    \resizebox{!}{0.74\linewidth}{%
       \phantom{龠}%
       \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
     }\par\vspace{2pt}%
-    \ifthenelse{\equal{#2}{}}%
-      {{\fontsize{5}{5}\selectfont\strut}\par}%
-      {\resizebox{!}{\heightof{{\fontsize{5}{5}\selectfont\strut Xg}}}{{\fontsize{5}{5}\selectfont #2}}\par}%
-    {\fontsize{7}{7}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
+    {\fontsize{8}{8}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
     \begin{minipage}[t][0pt]{\linewidth}%
-      \centering{\fontsize{5}{5}\selectfont #3}%
+      \centering{\fontsize{4}{4}\selectfont\textcolor{gray}{#3}}%
+    \end{minipage}%
+    \begin{minipage}[t][0pt]{\linewidth}%
+      \centering{\fontsize{5}{5}\selectfont\textcolor{gray}{#2}}%
     \end{minipage}%
   \end{minipage}%
   \par\vspace{4pt}%
