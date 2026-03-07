@@ -28,23 +28,24 @@ def write_radicals():
             jy = row.get('JYUTPING', '').strip()
             yale = row.get('Yale', '').strip()
             if count:
-                out.append(f"\\StrokeCount{{{count}}}\n")
+                if count.isdigit() and int(count) == 15:
+                    out.append(r"\StrokeCount{}")
+                out.append(f"\\StrokeCount{{{count}}}")
             if rad:
                 out.append(
-                    f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}\n"
+                    f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}"
                 )
 
     out_rounded_to_8 = (len(out) + 7)
     half = out_rounded_to_8 // 2 + 1
     with open(RADICALS_LEFT_TEX, 'w', encoding='utf-8') as f:
         for line in out[:half]:
-            f.write(line)
+            f.write(line + "\n")
 
     with open(RADICALS_RIGHT_TEX, 'w', encoding='utf-8') as f:
         for line in out[half:]:
-            f.write(line)
-        for _ in range(len(out), out_rounded_to_8 +2):
-            f.write(r"\Character{}{}{}{}{}")  # pad to a multiple of 8
+            f.write(line + "\n")
+
 
 if __name__ == '__main__':
     write_radicals()

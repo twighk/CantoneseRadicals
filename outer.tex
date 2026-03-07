@@ -4,14 +4,14 @@
 
 
 \documentclass[a3paper]{article}
-\usepackage[margin=1cm]{geometry}
+\usepackage[margin=0.5cm, nohead, nofoot]{geometry}
 
-\usepackage{array, calc, expl3, fontspec, graphicx, multicol, tcolorbox, xcolor, xifthen}
+\usepackage{array, calc, expl3, fontspec, graphicx, hyperref, multicol, qrcode, tcolorbox, xcolor, xifthen}
 
 % Use Hong Kong variant of Traditional Chinese
 \typeout{*** PrintMode = \PrintMode ***}
 \typeout{*** FontChoice = \FontChoice ***}
-\setmainfont{\FontChoice}[SizeFeatures={Size=11}]
+\setmainfont{\FontChoice}[]
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1pt}
@@ -22,9 +22,17 @@
 \author{}
 \date{}
 
+\newcommand{\gray}[1]{%
+  \textcolor{gray!95}{#1}%
+}
+
+\newcommand{\LinkedQR}[1]{%
+  \href{#1}{\resizebox{\linewidth}{!}{\gray{\qrcode{#1}}}}%
+}
+
 %\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
 \newcommand{\StrokeCount}[1]{%
-  \Character{\textcolor{gray!95}{#1}}{}{}{}{}%
+  \Character{\vspace{3em}\gray{#1}}{}{}{}{}%
 }
 
 % Select romanization form based on PrintMode
@@ -36,28 +44,37 @@
 \newsavebox{\CharProto}
 \sbox{\CharProto}{龠}
 
+\newlength{\CharCellHeight}
 \newcommand{\Character}[5]{%
-  \begin{minipage}[t]{\linewidth}%
+  \setbox0=\vbox{%
+    \hsize=\linewidth
+    \centering
+    \resizebox{!}{0.74\linewidth}{\phantom{龠}}\par\vspace{2pt}%
+    {\fontsize{11}{11}\selectfont\strut X}\par%
+    \rule{0pt}{1ex}\par%
+    \rule{0pt}{1ex}%
+  }%
+  \setlength{\CharCellHeight}{\ht0}%
+  \addtolength{\CharCellHeight}{\dp0}%
+  \begin{minipage}[t][\CharCellHeight]{\linewidth}%
     \centering
     \resizebox{!}{0.74\linewidth}{%
       \phantom{龠}%
       \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
     }\par\vspace{2pt}%
-    {\fontsize{8}{8}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
-    \begin{minipage}[t][0pt]{\linewidth}%
-      \centering{\fontsize{4}{4}\selectfont\textcolor{gray}{#3}}%
-    \end{minipage}%
-    \begin{minipage}[t][0pt]{\linewidth}%
-      \centering{\fontsize{5}{5}\selectfont\textcolor{gray}{#2}}%
+    {\fontsize{11}{11}\selectfont\strut \RomanizationForm{#4}{#5}}\par% Romanisation
+    \rule{0pt}{1ex}\begin{minipage}[t][0pt]{\linewidth}%
+      \centering{\fontsize{10}{10}\selectfont\gray{#3}}% English meaning
+    \end{minipage}\par%
+    \rule{0pt}{1ex}\begin{minipage}[t][0pt]{\linewidth}%
+      \centering{\fontsize{11}{11}\selectfont\gray{#2}}% Variant
     \end{minipage}%
   \end{minipage}%
   \par\vspace{4pt}%
 }
 
 \begin{document}
-\maketitle
-
-% Equal-height framed boxes with inner margin, separated by \columnsep
+\thispagestyle{empty}
 \tcbset{
   boxrule=0.4pt,
   arc=0pt,
@@ -68,17 +85,20 @@
 }
 \noindent
 \begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.25cm\relax, nobeforeafter, box align=top]
-\begin{multicols}{8}
-\input{Radicals-Left.tex}
-\vfill
-\end{multicols}
+  \begin{multicols*}{8}
+    \input{Radicals-Left.tex}
+  \end{multicols*}
 \end{tcolorbox}%
-\hspace{1cm}%
-\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.25cm\relax, nobeforeafter, box align=top]
-\begin{multicols}{8}
+\hspace{0.5cm}%
+\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
+\begin{multicols*}{8}
 \input{Radicals-Right.tex}
-\vfill
-\end{multicols}
+\begin{minipage}[t][8\CharCellHeight]{\linewidth}%
+  \centering
+  \rotatebox{270}{{\fontsize{50}{50}\selectfont The 214 Radicals}}
+  \vfill 
+\end{minipage}
+\resizebox{\linewidth}{!}{\LinkedQR{https://github.com/twighk/CantoneseRadicals}}\par%
+\end{multicols*}
 \end{tcolorbox}
-
 \end{document}
