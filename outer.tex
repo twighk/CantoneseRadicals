@@ -3,22 +3,31 @@
 % Uses Hong Kong font variants for Traditional Chinese characters
 
 
-\documentclass{article}
-\usepackage{fontspec}
-\usepackage{xifthen}
-\usepackage{array}
+\documentclass[a3paper]{article}
+\usepackage[margin=1cm]{geometry}
 
-% Noto Sans CJK HC = Hong Kong variant of Traditional Chinese
-%\setmainfont{Noto Sans CJK HK}[SizeFeatures={Size=11}]
-\setmainfont{Noto Serif CJK HK}[SizeFeatures={Size=11}]
-%\setmainfont{Source Han Serif HK}[SizeFeatures={Size=11}]
+\usepackage{array, fontspec, xcolor, xifthen}
 
-\title{Chinese Radicals with \PrintMode 過}
+% Use Hong Kong variant of Traditional Chinese
+\typeout{*** PrintMode = \PrintMode ***}
+\typeout{*** FontChoice = \FontChoice ***}
+\setmainfont{\FontChoice}[SizeFeatures={Size=11}]
 
+\usepackage{multicol}
+\setlength{\columnsep}{4pt}
+\setlength{\columnseprule}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+\title{The 214 Classifiers with \PrintMode }
 \author{}
 \date{}
 
-\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
+%\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
+\newcommand{\StrokeCount}[1]{%
+\Character{\Large #1}{}{}{}{}
+}
 
 % Select romanization form based on PrintMode
 \ifthenelse{\equal{\PrintMode}{Yale}}%
@@ -26,11 +35,26 @@
   {\newcommand{\RomanizationForm}[2]{#1}}
 
 % Character macro: #1=radical, #2=variant, #3=english, #4=jyutping, #5=yale
-\newcommand{\Character}[5]{\textbf{#1} (#3, \RomanizationForm{#4}{#5}) \quad}
+%\newcommand{\Character}[5]{\textbf{#1} (#3, \RomanizationForm{#4}{#5}) \quad}
+\newcommand{\Character}[5]{%
+\begin{minipage}[t]{\linewidth}
+\centering
+{\Large #1}
+
+{\tiny #2}
+
+{\scriptsize #3}
+
+{\scriptsize \RomanizationForm{#4}{#5}}
+\end{minipage}
+\par\vspace{4pt}
+}
 
 \begin{document}
 \maketitle
 
+\begin{multicols}{14}
 \input{Radicals.tex}
+\end{multicols}
 
 \end{document}
