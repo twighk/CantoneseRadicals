@@ -7,7 +7,9 @@ FONTS := $(shell fc-list :lang=zh | grep "HK" | awk -F: '{print $$2}' | awk -F, 
 # Cartesian product: each romanisation with each font
 VARIANTS = $(foreach r,$(ROMANISATIONS),$(foreach f,$(FONTS),$(r)-$(f)))
 
-all: $(PDFS)
+all: $(VARIANTS)
+
+checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK
 
 # Convenience targets: make Yale-AR_PL_UMing_HK → builds the PDF
 $(VARIANTS):
