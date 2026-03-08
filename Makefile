@@ -7,9 +7,11 @@ FONTS := $(shell fc-list :lang=zh | grep "HK" | awk -F: '{print $$2}' | awk -F, 
 # Cartesian product: each romanisation with each font
 VARIANTS = $(foreach r,$(ROMANISATIONS),$(foreach f,$(FONTS),$(r)-$(f)))
 
-all: $(VARIANTS)
+PYTHON = .venv/bin/python3
 
-checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK
+all: $(VARIANTS) readme
+
+checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK readme
 
 # Convenience targets: make Yale-AR_PL_UMing_HK → builds the PDF
 $(VARIANTS):
@@ -25,7 +27,10 @@ pdf/RadicalsPoster-%.pdf: outer.tex Radicals-Left.tex Radicals-Right.tex | pdf b
 	cp build/RadicalsPoster-$*.pdf pdf/
 
 Radicals-Left.tex Radicals-Right.tex: generate_radicals.py Radicals.csv
-	python3 generate_radicals.py
+	$(PYTHON) generate_radicals.py
+
+README.md: setup $(wildcard pdf/*.pdf) generate_readme.py
+	$(PYTHON) generate_readme.py
 
 pdf build:
 	mkdir -p $@
@@ -35,10 +40,19 @@ clean:
 
 clean-all: clean
 	rm -rf pdf
+	rm -rf .venv
 
 debug:
 	@echo "ROMANISATIONS = $(ROMANISATIONS)"
 	@echo "FONTS         = $(FONTS)"
 	@echo "VARIANTS      = $(VARIANTS)"
 
-.PHONY: all clean clean-all debug $(VARIANTS)
+.venv: Makefile
+	python3 -m venv .venv
+	.venv/bin/pip install pymupdf numpy
+
+setup: .venv
+
+readme: README.md
+
+.PHONY: all clean clean-all debug setup $(VARIANTS) readme
