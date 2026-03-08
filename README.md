@@ -62,7 +62,7 @@ make clean-all
 ## Requirements
 
 - XeLaTeX
-- Python 3 with pymupdf (`make setup`)
+- Python 3
 - Hong Kong Chinese fonts
 
 ## Sources
