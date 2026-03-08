@@ -50,7 +50,7 @@ debug:
 
 .venv: Makefile
 	python3 -m venv .venv
-	.venv/bin/pip install pymupdf numpy
+	.venv/bin/pip install -r requirements.txt
 
 setup: .venv
 
