@@ -24,7 +24,7 @@ def write_radicals():
             count = row.get('STROKE COUNT', '').strip()
             rad = row.get('RADICAL', '').strip()
             var = row.get('VARIANT', '').strip()
-            eng = row.get('ENGLISH', '').strip()
+            eng = row.get('ENGLISH', '').strip().replace(',', '\u200b,')
             jy = row.get('JYUTPING', '').strip()
             yale = row.get('Yale', '').strip()
             if count:
