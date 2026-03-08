@@ -49,7 +49,8 @@ def get_content_bbox_from_pixels(pix):
 def generate_preview(pdf_path, clip_path, strip_index):
     """
     Render full page, detect tight content bbox from pixels,
-    crop STRIP_ROWS rows starting at strip_index*2, save as PNG.
+    alternate between left and right half, crop STRIP_ROWS rows
+    advancing by strip_index, save as PNG.
     """
     doc = fitz.open(pdf_path)
     page = doc[0]
@@ -65,11 +66,17 @@ def generate_preview(pdf_path, clip_path, strip_index):
     content_height = y1 - y0
     row_height = content_height / ROWS_PER_COLUMN
     EVEN_ROWS = ROWS_PER_COLUMN - (ROWS_PER_COLUMN % STRIP_ROWS)
+    mid_x = (x0 + x1) // 2
 
-    row_start = (strip_index * STRIP_ROWS) % EVEN_ROWS
+    strips_per_side = EVEN_ROWS // STRIP_ROWS
+    pos = strip_index % (strips_per_side * 2)
+    side = pos // strips_per_side
+    cx0, cx1 = (x0, mid_x) if side == 0 else (mid_x, x1)
+
+    row_start = (pos % strips_per_side) * STRIP_ROWS
     ry0 = int(y0 + row_start * row_height)
     ry1 = int(min(y0 + (row_start + STRIP_ROWS) * row_height, y1))
-    strip = arr[ry0:ry1, x0:x1, :]
+    strip = arr[ry0:ry1, cx0:cx1, :]
 
     h, w = strip.shape[:2]
     fitz.Pixmap(fitz.csRGB, w, h, strip.tobytes(), False).save(clip_path)

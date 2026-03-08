@@ -40,7 +40,7 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 ## Building
 
 ```bash
-# Install dependencies
+# Install Python3 dependencies
 make setup
 
 # Show available fonts and variants
@@ -62,7 +62,7 @@ make clean-all
 ## Requirements
 
 - XeLaTeX
-- Python 3 with pymupdf (`pip install pymupdf`)
+- Python 3 with pymupdf (`make setup`)
 - Hong Kong Chinese fonts
 
 ## Sources
