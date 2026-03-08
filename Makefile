@@ -26,7 +26,7 @@ pdf/RadicalsPoster-%.pdf: outer.tex Radicals-Left.tex Radicals-Right.tex | pdf b
 	   \input{outer.tex}"
 	cp build/RadicalsPoster-$*.pdf pdf/
 
-Radicals-Left.tex Radicals-Right.tex: generate_radicals.py Radicals.csv setup
+Radicals-Left.tex Radicals-Right.tex: generate_radicals.py Radicals.csv setup | build
 	$(PYTHON) generate_radicals.py
 
 README.md: setup $(wildcard pdf/*.pdf) generate_readme.py

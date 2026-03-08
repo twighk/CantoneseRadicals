@@ -11,8 +11,8 @@ changes, so it simply overwrites `Radicals.tex` each time it runs.
 import csv
 
 CSV_PATH = 'Radicals.csv'
-RADICALS_LEFT_TEX = 'Radicals-left.tex'
-RADICALS_RIGHT_TEX = 'Radicals-right.tex'
+RADICALS_LEFT_TEX = 'build/Radicals-left.tex'
+RADICALS_RIGHT_TEX = 'build/Radicals-right.tex'
 
 
 def write_radicals():
