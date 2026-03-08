@@ -36,7 +36,7 @@ def write_radicals():
                     f"\\Character{{{rad}}}{{{var}}}{{{eng}}}{{{jy}}}{{{yale}}}"
                 )
 
-    out_rounded_to_8 = (len(out) + 7)
+    out_rounded_to_8 = len(out) + 7
     half = out_rounded_to_8 // 2 + 1
     with open(RADICALS_LEFT_TEX, 'w', encoding='utf-8') as f:
         for line in out[:half]:

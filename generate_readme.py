@@ -5,11 +5,10 @@ generate_readme.py - Generate README.md for CantoneseRadicals project
 - Crops alternating strips from left/right boxes for each font
 - Generates README with H2 romanisation, H3 font headings and TOC
 """
+from pathlib import Path
 
-import re
 import numpy as np
 import fitz  # pymupdf
-from pathlib import Path
 
 PDF_DIR = Path("pdf")
 CLIP_DIR = Path("clips")
@@ -46,7 +45,7 @@ def get_content_bbox_from_pixels(pix):
     return int(cols[0]), int(rows[0]), int(cols[-1]), int(rows[-1])
 
 
-def generate_preview(pdf_path, clip_path, strip_index):
+def generate_preview(pdf_path, clip_path, strip_index): # pylint: disable=too-many-locals
     """
     Render full page, detect tight content bbox from pixels,
     alternate between left and right half, crop STRIP_ROWS rows
@@ -65,10 +64,10 @@ def generate_preview(pdf_path, clip_path, strip_index):
 
     content_height = y1 - y0
     row_height = content_height / ROWS_PER_COLUMN
-    EVEN_ROWS = ROWS_PER_COLUMN - (ROWS_PER_COLUMN % STRIP_ROWS)
+    even_rows = ROWS_PER_COLUMN - (ROWS_PER_COLUMN % STRIP_ROWS)
     mid_x = (x0 + x1) // 2
 
-    strips_per_side = EVEN_ROWS // STRIP_ROWS
+    strips_per_side = even_rows // STRIP_ROWS
     pos = strip_index % (strips_per_side * 2)
     side = pos // strips_per_side
     cx0, cx1 = (x0, mid_x) if side == 0 else (mid_x, x1)
@@ -84,10 +83,12 @@ def generate_preview(pdf_path, clip_path, strip_index):
 
 
 def heading_anchor(text):
+    """Convert heading text to lowercase, replace spaces with dashes, remove parentheses."""
     return text.lower().replace(" ", "-").replace("(", "").replace(")", "")
 
 
 def main():
+    """Main function to generate README.md."""
     print(f"{'='*41}\n ReadMe Generator for Cantonese Radicals\n{'='*41}\n")
     CLIP_DIR.mkdir(exist_ok=True)
 
@@ -106,15 +107,17 @@ def main():
             generate_preview(pdf_path, clip_path, i)
 
     lines = []
-    lines.append("# Cantonese Radicals\n")
-    lines.append(
-        "A reference poster of the 214 Kangxi radicals with Cantonese romanization, "
-        "typeset in various Hong Kong Chinese fonts.\n"
+    lines.append("""
+# Cantonese Radicals
+
+A reference poster of the 214 Kangxi radicals with Cantonese romanization, typeset in various Hong Kong Chinese fonts.
+
+## Contents
+
+- [Radical Poster Romanisations and Fonts](#radical-poster-romanisations-and-fonts)
+"""[1:-1]
     )
 
-    # TOC
-    lines.append("## Contents\n")
-    lines.append("- [Radical Poster Romanisations and Fonts](#radical-poster-romanisations-and-fonts)")
     current = None
     for romanisation, font_name, _ in pdfs:
         if romanisation != current:
@@ -181,7 +184,7 @@ make clean-all
 - <https://github.com/twighk/CantoneseRadicals>
 """[1:-1])
 
-    README_PATH.write_text("\n".join(lines))
+    README_PATH.write_text("\n".join(lines), encoding="utf-8")
     print(f"\nWrote {README_PATH}")
 
 
