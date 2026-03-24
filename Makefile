@@ -11,7 +11,7 @@ PYTHON = .venv/bin/python3
 
 all: $(VARIANTS) readme
 
-checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK readme
+checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Yale-Noto_Sans_CJK_HK Yale-Noto_Serif_CJK_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK Jyutping-Noto_Sans_CJK_HK Jyutping-Noto_Serif_CJK_HK readme
 
 # Convenience targets: make Yale-AR_PL_UMing_HK → builds the PDF
 $(VARIANTS):

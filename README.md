@@ -8,9 +8,13 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
   - [Jyutping](#jyutping)
     - [AR PL UKai HK](#ar-pl-ukai-hk)
     - [AR PL UMing HK](#ar-pl-uming-hk)
+    - [Noto Sans CJK HK](#noto-sans-cjk-hk)
+    - [Noto Serif CJK HK](#noto-serif-cjk-hk)
   - [Yale](#yale)
     - [AR PL UKai HK](#ar-pl-ukai-hk)
     - [AR PL UMing HK](#ar-pl-uming-hk)
+    - [Noto Sans CJK HK](#noto-sans-cjk-hk)
+    - [Noto Serif CJK HK](#noto-serif-cjk-hk)
 - [Building](#building)
 - [Requirements](#requirements)
 - [Sources](#sources)
@@ -27,6 +31,14 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 
 [![AR PL UMing HK](clips/RadicalsPoster-Jyutping-AR_PL_UMing_HK.png)](pdf/RadicalsPoster-Jyutping-AR_PL_UMing_HK.pdf)
 
+#### Noto Sans CJK HK
+
+[![Noto Sans CJK HK](clips/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.png)](pdf/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.pdf)
+
+#### Noto Serif CJK HK
+
+[![Noto Serif CJK HK](clips/RadicalsPoster-Jyutping-Noto_Serif_CJK_HK.png)](pdf/RadicalsPoster-Jyutping-Noto_Serif_CJK_HK.pdf)
+
 ### Yale
 
 #### AR PL UKai HK
@@ -36,6 +48,14 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 #### AR PL UMing HK
 
 [![AR PL UMing HK](clips/RadicalsPoster-Yale-AR_PL_UMing_HK.png)](pdf/RadicalsPoster-Yale-AR_PL_UMing_HK.pdf)
+
+#### Noto Sans CJK HK
+
+[![Noto Sans CJK HK](clips/RadicalsPoster-Yale-Noto_Sans_CJK_HK.png)](pdf/RadicalsPoster-Yale-Noto_Sans_CJK_HK.pdf)
+
+#### Noto Serif CJK HK
+
+[![Noto Serif CJK HK](clips/RadicalsPoster-Yale-Noto_Serif_CJK_HK.png)](pdf/RadicalsPoster-Yale-Noto_Serif_CJK_HK.pdf)
 
 ## Building
 
