@@ -2,29 +2,57 @@
 % Supports multiple romanization schemes via -usepretex variable
 % Uses Hong Kong font variants for Traditional Chinese characters
 
-
-\documentclass[a3paper]{article}
-\usepackage[margin=0.5cm, nohead, nofoot]{geometry}
+\documentclass{article}
 
 \usepackage{array, calc, expl3, fontspec, graphicx, multicol, qrcode, tcolorbox, xcolor, xifthen}
-\usepackage[final,babel]{microtype}
+\usepackage[final]{microtype}
 
+% ── Poster geometry ────────────────────────────────────────────
+% All spacing derives from these four lengths; adjust here only.
+\newlength{\vmargin}  % top and bottom page margin
+\newlength{\hmargin}  % left and right page margin
+\newlength{\hgap}     % gap between the two tcolorboxes
+\newlength{\boxrule}  % tcolorbox border width
+\newlength{\eps}      % integer-division remainder absorber
+
+\setlength{\vmargin}{0.5cm}
+\setlength{\hmargin}{0.5cm}
+\setlength{\hgap}{0.5cm}
+\setlength{\boxrule}{0.4pt}
+\setlength{\eps}{0.4pt}
+
+\usepackage[
+  top=\vmargin, bottom=\vmargin,
+  left=\hmargin, right=\hmargin,
+  nohead, nofoot,
+  a3paper
+]{geometry}
+
+% ── Derived lengths ────────────────────────────────────────────
+% Declared here but computed after \begin{document} where \paperheight
+% and \paperwidth are correct.
+\newlength{\tboxouterheight}
+\newlength{\tboxwidth}
+\newlength{\CharCellHeight}
+
+% ── Hyperref ───────────────────────────────────────────────────
 \usepackage[
   hidelinks,
   pdftitle={The 214 Cantonese Radicals},
   pdfauthor={T. Branch},
   pdfsubject={Cantonese Radicals Reference Poster},
-  pdfkeywords={Cantonese, Chinese, Radicals, Jyutping, Yale}
+  pdfkeywords={Cantonese, Chinese, Radicals, Jyutping, Yale},
   pdfcreator={XeLaTeX},
   pdfinfo={URL=https://github.com/twighk/CantoneseRadicals},
   pdflang={zh-HK}
 ]{hyperref}
 
-% Use Hong Kong variant of Traditional Chinese
+% ── Fonts ──────────────────────────────────────────────────────
+% Default LaTeX font (Computer Modern) is used for all Latin text.
+% \cfont{} applies the Chinese font only to its argument.
 \typeout{*** PrintMode = \PrintMode ***}
 \typeout{*** FontChoice = \FontChoice ***}
-\setmainfont{\FontChoice}[
-  BoldFont={},
+\newfontface\cjkfont{\FontChoice}[
   FallbackFonts={
     {AR PL UKai HK},
     {AR PL UMing HK},
@@ -34,16 +62,22 @@
     {LastResort}
   }
 ]
+\newcommand{\cfont}[1]{{\cjkfont #1}}
 \tracinglostchars=0
+
+% ── Global spacing ─────────────────────────────────────────────
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\topskip}{0pt}
 \setlength{\columnsep}{4pt}
 \setlength{\columnseprule}{0.4pt}
 
-\title{The 214 Classifiers with \PrintMode }
+% ── Metadata ───────────────────────────────────────────────────
+\title{The 214 Classifiers with \PrintMode}
 \author{}
 \date{}
 
+% ── Utility macros ─────────────────────────────────────────────
 \newcommand{\gray}[1]{%
   \textcolor{gray!95}{#1}%
 }
@@ -52,75 +86,116 @@
   \href{#1}{\resizebox{\linewidth}{!}{\gray{\qrcode{#1}}}}%
 }
 
-%\newcommand{\StrokeCount}[1]{\section*{#1 strokes}}
-\newcommand{\StrokeCount}[1]{%
-  \Character{\vspace{3em}\gray{#1}}{}{}{}{}%
-}
-
-% Select romanization form based on PrintMode
+% ── Romanization selection ─────────────────────────────────────
 \ifthenelse{\equal{\PrintMode}{Yale}}%
   {\newcommand{\RomanizationForm}[2]{#2}}%
   {\newcommand{\RomanizationForm}[2]{#1}}
 
-% Character macro: #1=radical, #2=variant, #3=english, #4=jyutping, #5=yale
+% ── Character cell ─────────────────────────────────────────────
+% Prototype box for \wd measurement — must use \cfont so width matches render.
 \newsavebox{\CharProto}
-\sbox{\CharProto}{龠}
+\sbox{\CharProto}{\cfont{龠}}
 
-\newlength{\CharCellHeight}
+% \Character{radical}{variant}{english}{jyutping}{yale}
+% Produces a block of exactly \CharCellHeight. Content pinned to top.
 \newcommand{\Character}[5]{%
-  \setbox0=\vbox{%
-    \hsize=\linewidth
-    \centering
-    \resizebox{!}{0.74\linewidth}{\phantom{龠}}\par\vspace{2pt}%
-    {\fontsize{11}{11}\selectfont\strut X}\par%
-    \rule{0pt}{1ex}\par%
-    \rule{0pt}{1ex}%
-  }%
-  \setlength{\CharCellHeight}{\ht0}%
-  \addtolength{\CharCellHeight}{\dp0}%
-  \begin{minipage}[t][\CharCellHeight]{\linewidth}%
+  \begin{minipage}[t][\CharCellHeight][t]{\linewidth}%
     \centering
     \resizebox{!}{0.74\linewidth}{%
-      \phantom{龠}%
-      \llap{\hbox to \wd\CharProto{\hss#1\hss}}%
+      \cfont{\phantom{龠}}%
+      \llap{\hbox to \wd\CharProto{\hss\cfont{#1}\hss}}%
     }\par\vspace{2pt}%
-    {\fontsize{11}{11}\selectfont\strut \RomanizationForm{#4}{#5}}\par% Romanisation
-    \rule{0pt}{1ex}\begin{minipage}[t][0pt]{\linewidth}%
-      \centering\spaceskip=0.5em plus 0.5em minus 0.25em{\fontsize{10}{10}\selectfont\gray{\textls[-50]{#3}}}% English meaning
+    {\fontsize{11}{11}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
+    \rule{0pt}{1ex}%
+    \begin{minipage}[t][0pt]{\linewidth}%
+      \centering\spaceskip=0.5em plus 0.5em minus 0.25em
+      {\fontsize{10}{10}\selectfont\gray{\textls[-50]{#3}}}%
     \end{minipage}\par%
-    \rule{0pt}{1ex}\begin{minipage}[t][0pt]{\linewidth}%
-      \centering{\fontsize{11}{11}\selectfont\gray{#2}}% Variant
+    \rule{0pt}{1ex}%
+    \begin{minipage}[t][0pt]{\linewidth}%
+      \centering{\fontsize{11}{11}\selectfont\gray{\cfont{#2}}}%
     \end{minipage}%
   \end{minipage}%
-  \par\vspace{4pt}%
 }
 
+% \StrokeCount: delegates to \Character so height is identical.
+\newcommand{\StrokeCount}[1]{%
+  \Character{\vspace{3em}\gray{#1}}{}{}{}{}%
+}
+
+% ──────────────────────────────────────────────────────────────
 \begin{document}
 \thispagestyle{empty}
+
+% ── Compute derived lengths now that \paperheight/\paperwidth are correct ──
+% tboxouterheight = \paperheight - \vmargin - \vmargin - \eps
+\setlength{\tboxouterheight}{\paperheight}
+\addtolength{\tboxouterheight}{-\vmargin}
+\addtolength{\tboxouterheight}{-\vmargin}
+\addtolength{\tboxouterheight}{-\eps}
+
+% CharCellHeight = (\tboxouterheight - \boxrule - \boxrule + \eps) / 15 - \eps
+\setlength{\CharCellHeight}{\tboxouterheight}
+\addtolength{\CharCellHeight}{-\boxrule}
+\addtolength{\CharCellHeight}{-\boxrule}
+\addtolength{\CharCellHeight}{\eps}
+\divide\CharCellHeight by 15
+\addtolength{\CharCellHeight}{-\eps}
+
+% tboxwidth = (\paperwidth - \hmargin - \hmargin - \hgap) / 2 - \boxrule - \boxrule
+\setlength{\tboxwidth}{\paperwidth}
+\addtolength{\tboxwidth}{-\hmargin}
+\addtolength{\tboxwidth}{-\hmargin}
+\addtolength{\tboxwidth}{-\hgap}
+\divide\tboxwidth by 2
+\addtolength{\tboxwidth}{-\boxrule}
+\addtolength{\tboxwidth}{-\boxrule}
+
+\typeout{DEBUG paperheight=\the\paperheight}
+\typeout{DEBUG textheight=\the\textheight}
+\typeout{DEBUG tboxouterheight=\the\tboxouterheight}
+\typeout{DEBUG tboxwidth=\the\tboxwidth}
+\typeout{DEBUG CharCellHeight=\the\CharCellHeight}
+\typeout{DEBUG 15xCellHeight=\the\dimexpr15\CharCellHeight\relax}
+
 \tcbset{
-  boxrule=0.4pt,
+  boxrule=\boxrule,
   arc=0pt,
   colback=white,
   colframe=black,
-  left=0pt, right=0pt, top=0pt, bottom=4pt,
+  left=0pt, right=0pt, top=0pt, bottom=0pt,
   valign=top
 }
-\noindent
-\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.25cm\relax, nobeforeafter, box align=top]
-  \begin{multicols*}{8}
-    \input{build/Radicals-Left.tex}
-  \end{multicols*}
+
+\begin{tcolorbox}[
+  width=\tboxwidth,
+  height=\tboxouterheight,
+  nobeforeafter,
+  box align=top
+]
+  \begin{multicols}{8}
+    \lineskip=0pt\baselineskip=0pt
+    \input{build/Radicals-Left.tex}%
+  \end{multicols}
 \end{tcolorbox}%
-\hspace{0.5cm}%
-\begin{tcolorbox}[width=\dimexpr0.5\textwidth-0.5cm\relax, nobeforeafter, box align=top]
-\begin{multicols*}{8}
-\input{build/Radicals-Right.tex}
-\begin{minipage}[t][8\CharCellHeight]{\linewidth}%
-  \centering
-  \rotatebox{270}{{\fontsize{50}{50}\selectfont The 214 Radicals}}
-  \vfill 
-\end{minipage}
-\resizebox{\linewidth}{!}{\LinkedQR{https://github.com/twighk/CantoneseRadicals}}\par%
-\end{multicols*}
+\hspace{\hgap}%
+\begin{tcolorbox}[
+  width=\tboxwidth,
+  height=\tboxouterheight,
+  nobeforeafter,
+  box align=top
+]
+  \begin{multicols}{8}
+    \lineskip=0pt\baselineskip=0pt
+    \input{build/Radicals-Right.tex}%
+    \begin{minipage}[t][8\CharCellHeight]{\linewidth}%
+      \centering
+      \vspace{\CharCellHeight}
+      \rotatebox{270}{{\fontsize{50}{50}\selectfont The 214 Radicals}}
+      \vfill
+      \resizebox{\linewidth}{!}{\LinkedQR{https://github.com/twighk/CantoneseRadicals}}
+      \par
+    \end{minipage}
+  \end{multicols}
 \end{tcolorbox}
 \end{document}

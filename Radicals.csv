@@ -27,7 +27,7 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;卩;㔾;seal;zit3;jit;
 ;厂;;cliff;hon3;hon;
 ;厶;;private;si1;sī;
-;又;;again, r.hand;jau6;yauh;
+;又;;again, right hand;jau6;yauh;
 3;口;;mouth;hau2;háu;
 ;囗;;enclosure;wai4;wàih;
 ;土;;earth;tou2;tóu;
@@ -50,7 +50,7 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;己;;oneself;gei2;géi;
 ;巾;;turban, scarf;gan1;gān;
 ;干;;dry, oppose;gon1;gōn;
-;幺;;short, tiny 么;jiu1;yīu;
+;幺;么;short, tiny;jiu1;yīu;
 ;广;;house on cliff;gwong2;gwóng;
 ;廴;;long stride;jan5;yáhn;
 ;廾;;two hands, arch;gung2;gúng;
@@ -88,7 +88,7 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;爪;爫;claw;zaau2;jáau;
 ;父;;father;fu6;fuh;
 ;爻;;trigrams;ngaau4;ngàauh;
-;爿;;split wood 丬;coeng4;chèuhng;
+;爿;丬;split wood;coeng4;chèuhng;
 ;片;;slice, film;pin3;pin;
 ;牙;;tooth, fang;ngaa4;ngàh;
 ;牛;牜 ⺧;cow;ngau4;ngàuh;
@@ -101,7 +101,7 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;生;;life;saang1;sāang;
 ;用;;use;jung6;yuhng;
 ;田;;field;tin4;tìhn;
-;疋;;bolt of cloth ⺪;pat1;pāt;
+;疋;;bolt of cloth \cfont{⺪};pat1;pāt;
 ;疒;;sickness;nik6;nihk;
 ;癶;;footsteps, legs;but6;buht;
 ;白;;white;baak6;baahk;
@@ -113,7 +113,7 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;石;;stone;sek6;sehk;
 ;示;礻;spirit;si6;sih;
 ;禸;;track, rump;jau5;yáuh;
-;禾;;grain;wo4;wòh;
+;禾;;grain;wo4;wòh; *******************************
 ;穴;;cave;jyut6;yuht;
 ;立;;stand;laap6;laahp;
 6;竹;⺮;bamboo;zuk1;jūk;竹花頭(zuk1 faa1 tau2)
@@ -161,14 +161,14 @@ STROKE COUNT;RADICAL;VARIANT;ENGLISH;JYUTPING;Yale;ALSO CALLED
 ;辛;;bitter;san1;sān;
 ;辰;;morning;san4;sàhn;
 ;辵;辶 ⻍ ⻎;walk;coek3;cheuk;艇仔邊(teng5 zai2 bin1)撐艇仔(caang1 teng5 zai2)
-;邑;阝(rhs);city;jap1;yāp;耳仔邊(ji5 zai2 bin1)
+;邑;;city\\\cfont{阝} (rhs);jap1;yāp;耳仔邊(ji5 zai2 bin1)
 ;酉;;alcohol, wine;jau5;yáuh;
 ;釆;;dis\-tin\-guish;bin6;bihn;
 ;里;;village, li=668.7m;lei5;léih;
-8;金;;gold, metal 釒;gam1;gām;
+8;金;;gold, metal \cfont{釒};gam1;gām;
 ;長;镸;long;coeng4;chèuhng;
 ;門;;gate, door;mun4;mùhn;
-;阜;;mound, dam ⻖;fau6;fauh;耳仔邊(ji5 zai2 bin1)
+;阜;;mound, dam \cfont{⻖};fau6;fauh;耳仔邊(ji5 zai2 bin1)
 ;隶;;slave;dai6;daih;
 ;隹;;short-tailed bird;zeoi1;jēui;
 ;雨;⻗;rain;jyu5;yúh;
