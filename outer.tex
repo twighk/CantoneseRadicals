@@ -102,8 +102,8 @@
   \begin{minipage}[t][\CharCellHeight][t]{\linewidth}%
     \centering
     \resizebox{!}{0.74\linewidth}{%
-      \cfont{\phantom{龠}}%
-      \llap{\hbox to \wd\CharProto{\hss\cfont{#1}\hss}}%
+      \makebox[0pt][l]{\cfont{\phantom{龠}}}%
+      \makebox[\wd\CharProto]{\cfont{#1}}%
     }\par\vspace{2pt}%
     {\fontsize{11}{11}\selectfont\strut \RomanizationForm{#4}{#5}}\par%
     \rule{0pt}{1ex}%
