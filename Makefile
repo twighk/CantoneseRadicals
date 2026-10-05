@@ -1,7 +1,7 @@
 ROMANISATIONS = Jyutping Yale
 
-# Run fc-list pipeline to get clean HK font family names
-FONTS := $(shell fc-list :lang=zh | grep "HK" | awk -F: '{print $$2}' | awk -F, '{print $$1}' \
+# Run fc-list pipeline to get clean HK (and Chiron, which follows HK glyph standards) font family names
+FONTS := $(shell fc-list :lang=zh | grep -E "HK|Chiron" | awk -F: '{print $$2}' | awk -F, '{print $$1}' \
 		   | sed 's/^[[:space:]]*//;s/[[:space:]]*$$//' | sort -u | tr ' ' '_')
 		   
 # Cartesian product: each romanisation with each font
@@ -11,7 +11,7 @@ PYTHON = .venv/bin/python3
 
 all: $(VARIANTS) readme
 
-checked: Yale-AR_PL_UKai_HK Yale-AR_PL_UMing_HK Yale-Noto_Sans_CJK_HK Yale-Noto_Serif_CJK_HK Jyutping-AR_PL_UKai_HK Jyutping-AR_PL_UMing_HK Jyutping-Noto_Sans_CJK_HK Jyutping-Noto_Serif_CJK_HK readme
+checked: $(foreach r,$(ROMANISATIONS),$(foreach f,AR_PL_UKai_HK AR_PL_UMing_HK Chiron_Hei_HK Chiron_Sung_HK Chiron_GoRound_TC Noto_Sans_CJK_HK Noto_Serif_CJK_HK,$(r)-$(f))) readme
 
 # Convenience targets: make Yale-AR_PL_UMing_HK → builds the PDF
 $(VARIANTS):

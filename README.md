@@ -8,11 +8,17 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
   - [Jyutping](#jyutping)
     - [AR PL UKai HK](#ar-pl-ukai-hk)
     - [AR PL UMing HK](#ar-pl-uming-hk)
+    - [Chiron GoRound TC](#chiron-goround-tc)
+    - [Chiron Hei HK](#chiron-hei-hk)
+    - [Chiron Sung HK](#chiron-sung-hk)
     - [Noto Sans CJK HK](#noto-sans-cjk-hk)
     - [Noto Serif CJK HK](#noto-serif-cjk-hk)
   - [Yale](#yale)
     - [AR PL UKai HK](#ar-pl-ukai-hk)
     - [AR PL UMing HK](#ar-pl-uming-hk)
+    - [Chiron GoRound TC](#chiron-goround-tc)
+    - [Chiron Hei HK](#chiron-hei-hk)
+    - [Chiron Sung HK](#chiron-sung-hk)
     - [Noto Sans CJK HK](#noto-sans-cjk-hk)
     - [Noto Serif CJK HK](#noto-serif-cjk-hk)
 - [Building](#building)
@@ -31,6 +37,18 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 
 [![AR PL UMing HK](clips/RadicalsPoster-Jyutping-AR_PL_UMing_HK.png)](pdf/RadicalsPoster-Jyutping-AR_PL_UMing_HK.pdf)
 
+#### Chiron GoRound TC
+
+[![Chiron GoRound TC](clips/RadicalsPoster-Jyutping-Chiron_GoRound_TC.png)](pdf/RadicalsPoster-Jyutping-Chiron_GoRound_TC.pdf)
+
+#### Chiron Hei HK
+
+[![Chiron Hei HK](clips/RadicalsPoster-Jyutping-Chiron_Hei_HK.png)](pdf/RadicalsPoster-Jyutping-Chiron_Hei_HK.pdf)
+
+#### Chiron Sung HK
+
+[![Chiron Sung HK](clips/RadicalsPoster-Jyutping-Chiron_Sung_HK.png)](pdf/RadicalsPoster-Jyutping-Chiron_Sung_HK.pdf)
+
 #### Noto Sans CJK HK
 
 [![Noto Sans CJK HK](clips/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.png)](pdf/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.pdf)
@@ -48,6 +66,18 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 #### AR PL UMing HK
 
 [![AR PL UMing HK](clips/RadicalsPoster-Yale-AR_PL_UMing_HK.png)](pdf/RadicalsPoster-Yale-AR_PL_UMing_HK.pdf)
+
+#### Chiron GoRound TC
+
+[![Chiron GoRound TC](clips/RadicalsPoster-Yale-Chiron_GoRound_TC.png)](pdf/RadicalsPoster-Yale-Chiron_GoRound_TC.pdf)
+
+#### Chiron Hei HK
+
+[![Chiron Hei HK](clips/RadicalsPoster-Yale-Chiron_Hei_HK.png)](pdf/RadicalsPoster-Yale-Chiron_Hei_HK.pdf)
+
+#### Chiron Sung HK
+
+[![Chiron Sung HK](clips/RadicalsPoster-Yale-Chiron_Sung_HK.png)](pdf/RadicalsPoster-Yale-Chiron_Sung_HK.pdf)
 
 #### Noto Sans CJK HK
 
