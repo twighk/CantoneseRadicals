@@ -32,7 +32,23 @@ Radicals-Left.tex Radicals-Right.tex: generate_radicals.py Radicals.csv setup | 
 README.md: setup $(wildcard pdf/*.pdf) generate_readme.py
 	$(PYTHON) generate_readme.py
 
-pdf build:
+# Historical-script fonts built from glyphs selected out of EVOBC (see historical/README.md)
+EVOBC_DIR = ../characters/static/evobc
+
+historical-fonts: fonts/EVOBCOracleBone.otf fonts/EVOBCSeal.otf
+
+fonts/EVOBCOracleBone.otf: historical/OBC/sources.tsv historical/build_font.py | .venv fonts
+	$(PYTHON) historical/build_font.py OBC "EVOBC Oracle Bone" $@
+
+fonts/EVOBCSeal.otf: historical/SS/sources.tsv historical/build_font.py | .venv fonts
+	$(PYTHON) historical/build_font.py SS "EVOBC Seal" $@
+
+# Re-pick the glyphs from a local EVOBC copy (only needed to change the selection)
+historical-select: setup
+	$(PYTHON) historical/select_glyphs.py OBC $(EVOBC_DIR)
+	$(PYTHON) historical/select_glyphs.py SS $(EVOBC_DIR)
+
+pdf build fonts:
 	mkdir -p $@
 
 clean:
@@ -56,4 +72,4 @@ setup: .venv
 
 readme: README.md
 
-.PHONY: all clean clean-all debug setup $(VARIANTS) readme
+.PHONY: all clean clean-all debug setup $(VARIANTS) readme historical-fonts historical-select
