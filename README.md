@@ -1,6 +1,6 @@
 # Cantonese Radicals
 
-A reference poster of the 214 Kangxi radicals with Cantonese romanization, typeset in various Hong Kong Chinese fonts.
+A reference poster of the 214 Kangxi radicals with Cantonese romanization, typeset in various Hong Kong Chinese fonts, plus experimental oracle bone and seal script fonts built from historical glyphs.
 
 ## Contents
 
@@ -11,6 +11,8 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
     - [Chiron GoRound TC](#chiron-goround-tc)
     - [Chiron Hei HK](#chiron-hei-hk)
     - [Chiron Sung HK](#chiron-sung-hk)
+    - [EVOBC Oracle Bone](#evobc-oracle-bone)
+    - [EVOBC Seal](#evobc-seal)
     - [Noto Sans CJK HK](#noto-sans-cjk-hk)
     - [Noto Serif CJK HK](#noto-serif-cjk-hk)
   - [Yale](#yale)
@@ -19,6 +21,8 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
     - [Chiron GoRound TC](#chiron-goround-tc)
     - [Chiron Hei HK](#chiron-hei-hk)
     - [Chiron Sung HK](#chiron-sung-hk)
+    - [EVOBC Oracle Bone](#evobc-oracle-bone)
+    - [EVOBC Seal](#evobc-seal)
     - [Noto Sans CJK HK](#noto-sans-cjk-hk)
     - [Noto Serif CJK HK](#noto-serif-cjk-hk)
 - [Building](#building)
@@ -49,6 +53,14 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 
 [![Chiron Sung HK](clips/RadicalsPoster-Jyutping-Chiron_Sung_HK.png)](pdf/RadicalsPoster-Jyutping-Chiron_Sung_HK.pdf)
 
+#### EVOBC Oracle Bone
+
+[![EVOBC Oracle Bone](clips/RadicalsPoster-Jyutping-EVOBC_Oracle_Bone.png)](pdf/RadicalsPoster-Jyutping-EVOBC_Oracle_Bone.pdf)
+
+#### EVOBC Seal
+
+[![EVOBC Seal](clips/RadicalsPoster-Jyutping-EVOBC_Seal.png)](pdf/RadicalsPoster-Jyutping-EVOBC_Seal.pdf)
+
 #### Noto Sans CJK HK
 
 [![Noto Sans CJK HK](clips/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.png)](pdf/RadicalsPoster-Jyutping-Noto_Sans_CJK_HK.pdf)
@@ -78,6 +90,14 @@ A reference poster of the 214 Kangxi radicals with Cantonese romanization, types
 #### Chiron Sung HK
 
 [![Chiron Sung HK](clips/RadicalsPoster-Yale-Chiron_Sung_HK.png)](pdf/RadicalsPoster-Yale-Chiron_Sung_HK.pdf)
+
+#### EVOBC Oracle Bone
+
+[![EVOBC Oracle Bone](clips/RadicalsPoster-Yale-EVOBC_Oracle_Bone.png)](pdf/RadicalsPoster-Yale-EVOBC_Oracle_Bone.pdf)
+
+#### EVOBC Seal
+
+[![EVOBC Seal](clips/RadicalsPoster-Yale-EVOBC_Seal.png)](pdf/RadicalsPoster-Yale-EVOBC_Seal.pdf)
 
 #### Noto Sans CJK HK
 
@@ -114,6 +134,7 @@ make clean-all
 - XeLaTeX
 - Python 3
 - Hong Kong Chinese fonts
+- potrace (for the historical-script fonts)
 
 ## Sources
 
@@ -121,3 +142,6 @@ make clean-all
 - <https://www.cantoneseclass101.com/chinese-radicals/>
 - <https://en.wikipedia.org/wiki/Kangxi_radicals>
 - <https://github.com/twighk/CantoneseRadicals>
+- Oracle bone and seal script glyphs: EVOBC (Evolution of Oracle Bone Characters), Guan et al.,
+  <https://arxiv.org/abs/2401.12467>, <https://github.com/RomanticGodVAN/character-Evolution-Dataset>;
+  see [historical/README.md](historical/README.md) for how they were selected and their provenance

@@ -1,13 +1,16 @@
 # Historical-script fonts
 
-Two experimental fonts covering the poster's radicals in early scripts:
+Two experimental fonts of early scripts, covering every character EVOBC has for the stage
+(not just the poster's radicals), so they can be used for other text too:
 
-| Font | Stage | Glyphs |
-|---|---|---|
-| `fonts/EVOBCOracleBone.otf` — *EVOBC Oracle Bone* | 甲骨文 oracle bone (EVOBC `OBC`) | 172 |
-| `fonts/EVOBCSeal.otf` — *EVOBC Seal* | 篆書 seal (EVOBC `SS`) | 235 |
+| Font | Stage | Glyphs | Poster characters |
+|---|---|---|---|
+| `fonts/EVOBCOracleBone.otf` — *EVOBC Oracle Bone* | 甲骨文 oracle bone (EVOBC `OBC`) | 1,762 | 172 / 276 |
+| `fonts/EVOBCSeal.otf` — *EVOBC Seal* | 篆書 seal (EVOBC `SS`) | 9,082 | 235 / 276 |
 
-Radicals with no attested form in a stage (e.g. 丨 丶 丿 in oracle bone) have no glyph.
+Characters with no attested form in a stage (e.g. 丨 丶 丿 in oracle bone) have no glyph,
+and the posters leave them as gaps rather than mixing in modern forms (`GAP_FONTS` in the
+Makefile).
 
 ## How the glyphs are chosen
 
@@ -20,7 +23,8 @@ Gaps can be filled from `components.tsv`, which crops a component out of a host
 character's glyph (e.g. seal 亠 is the top of seal 高). Borrowed glyphs are marked as crops
 in `sources.tsv`.
 
-`build_font.py` upscales each chosen image, traces it with potrace (`svg/`) and builds a
+`build_font.py` upscales each chosen image, traces it with potrace (into
+`build/historical/<stage>/svg/`, not committed) and builds a
 CFF OpenType font, each glyph centred and scaled to fill the em square.
 
 ```bash

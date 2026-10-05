@@ -2,7 +2,7 @@
 """
 build_font.py - Trace the selected historical glyphs and build an OpenType font
 - Upscales and binarises each PNG in historical/<stage>/png/
-- Traces it to historical/<stage>/svg/ with potrace
+- Traces it to build/historical/<stage>/svg/ with potrace
 - Fits each outline into the em square and maps it to the character's codepoint
 
 Usage: build_font.py STAGE FAMILY_NAME OUTPUT.otf
@@ -67,8 +67,8 @@ def main():
         sys.exit(__doc__)
     stage, family, output = sys.argv[1:]
     src = Path("historical") / stage
-    svg_dir = src / "svg"
-    svg_dir.mkdir(exist_ok=True)
+    svg_dir = Path("build/historical") / stage / "svg"   # traced outlines, regenerated from the PNGs
+    svg_dir.mkdir(parents=True, exist_ok=True)
 
     rows = list(csv.DictReader(open(src / "sources.tsv", encoding="utf-8"), delimiter="\t"))
     glyphs, cmap = {".notdef": None}, {}

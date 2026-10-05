@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-select_glyphs.py - Pick one representative historical glyph per poster character
+select_glyphs.py - Pick one representative historical glyph per character
 - Reads EVOBC images (one folder per EVOBC ID, filenames <ID>_<Book|Web>_<STAGE>_...)
-- For each radical/variant in Radicals.csv, takes every image of the requested stage
+- For every character EVOBC has at the requested stage, takes all its images
 - Picks the medoid: the image with the smallest total distance to all the others
 - Copies the chosen image into historical/<stage>/png/ and records its provenance
 
@@ -122,13 +122,24 @@ def main():
         shutil.rmtree(png_dir)
     png_dir.mkdir(parents=True)
 
-    rows = []
-    for ch in poster_characters():
+    # Every character EVOBC has at this stage, not just the poster's, so the
+    # font is usable for other text too
+    by_char = {}
+    for ch, evobc_ids in ids.items():
+        if len(ch) != 1 or ord(ch) < 0x2E80:
+            continue
         paths = sorted(
-            f for i in ids.get(ch, []) if (evobc / i).is_dir()
+            f for i in evobc_ids if (evobc / i).is_dir()
             for f in (evobc / i).iterdir() if f.name.split("_")[2:3] == [stage]
         )
-        chosen, usable = medoid(paths)
+        if paths:
+            by_char[ch] = paths
+
+    rows = []
+    for n, ch in enumerate(sorted(by_char), 1):
+        if n % 500 == 0:
+            print(f"  {n}/{len(by_char)}")
+        chosen, usable = medoid(by_char[ch])
         if chosen is None:
             continue
         name = f"U+{ord(ch):04X}{chosen.suffix.lower()}"
@@ -141,7 +152,10 @@ def main():
         writer = csv.writer(fh, delimiter="\t", lineterminator="\n")
         writer.writerow(["character", "codepoint", "file", "evobc_id", "evobc_file", "candidates"])
         writer.writerows(rows)
-    print(f"{stage}: selected {len(rows)} of {len(poster_characters())} characters -> {out}")
+    have = {r[0] for r in rows}
+    poster = poster_characters()
+    print(f"{stage}: selected {len(rows)} characters "
+          f"({sum(c in have for c in poster)} of {len(poster)} on the poster) -> {out}")
 
 
 if __name__ == "__main__":
