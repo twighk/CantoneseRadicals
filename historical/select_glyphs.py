@@ -26,8 +26,10 @@ BLUR = 2.0       # tolerance for small stroke offsets when comparing
 
 def poster_characters():
     """Radicals and their listed variants, in poster order, without duplicates."""
+    with open("Radicals.csv", encoding="utf-8") as fh:
+        rows = list(csv.reader(fh, delimiter=";"))[1:]
     chars = []
-    for row in list(csv.reader(open("Radicals.csv", encoding="utf-8"), delimiter=";"))[1:]:
+    for row in rows:
         for ch in [row[1]] + row[2].split():
             if ch not in chars:
                 chars.append(ch)
@@ -49,14 +51,20 @@ def ink_mask(path):
     return mask
 
 
+def ink_box(mask):
+    """(left, top, right, bottom) of the ink, inclusive."""
+    rows, cols = np.where(mask.any(axis=1))[0], np.where(mask.any(axis=0))[0]
+    return cols[0], rows[0], cols[-1], rows[-1]
+
+
 def normalise(mask):
     """Crop to the ink, fit into a SIZE square keeping aspect ratio, blur."""
-    rows, cols = np.where(mask.any(axis=1))[0], np.where(mask.any(axis=0))[0]
-    crop = mask[rows[0]:rows[-1] + 1, cols[0]:cols[-1] + 1]
+    left, top, right, bottom = ink_box(mask)
+    crop = mask[top:bottom + 1, left:right + 1]
     h, w = crop.shape
     scale = (SIZE - 8) / max(h, w)
     img = Image.fromarray((crop * 255).astype(np.uint8)).resize(
-        (max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
+        (max(1, round(w * scale)), max(1, round(h * scale))), Image.Resampling.LANCZOS)
     canvas = Image.new("L", (SIZE, SIZE), 0)
     canvas.paste(img, ((SIZE - img.width) // 2, (SIZE - img.height) // 2))
     canvas = canvas.filter(ImageFilter.GaussianBlur(BLUR))
@@ -79,51 +87,48 @@ def medoid(paths):
     return kept[int(dist.sum(axis=1).argmin())], len(kept)
 
 
+def crop_component(host, crop):
+    """
+    Cut a component out of a host glyph, padded with white. The crop is
+    "x0,y0,x1,y1" as fractions of the host's ink box.
+    """
+    left, top, right, bottom = ink_box(ink_mask(host))
+    x0, y0, x1, y1 = (float(v) for v in crop.split(","))
+    w, h = right - left, bottom - top
+    part = Image.open(host).convert("L").crop((
+        round(left + x0 * w), round(top + y0 * h),
+        round(left + x1 * w) + 1, round(top + y1 * h) + 1))
+    canvas = Image.new("L", (part.width + 20, part.height + 20), 255)
+    canvas.paste(part, (10, 10))
+    return canvas
+
+
 def borrowed_components(stage, evobc, png_dir, have):
-    """
-    Fill gaps from historical/components.tsv: crop a component out of a host
-    character's glyph. The crop is x0,y0,x1,y1 as fractions of the host's ink box.
-    """
+    """Fill gaps from historical/components.tsv by cropping a host character's glyph."""
+    with open(COMPONENTS, encoding="utf-8") as fh:
+        comps = list(csv.DictReader(fh, delimiter="\t"))
     rows = []
-    for comp in csv.DictReader(open(COMPONENTS, encoding="utf-8"), delimiter="\t"):
-        if comp["stage"] != stage or comp["character"] in have:
+    for comp in comps:
+        ch = comp["character"]
+        if comp["stage"] != stage or ch in have:
             continue
-        ch, host = comp["character"], evobc / comp["evobc_file"].split("_")[0] / comp["evobc_file"]
-        img = Image.open(host).convert("L")
-        mask = ink_mask(host)
-        rows_, cols = np.where(mask.any(axis=1))[0], np.where(mask.any(axis=0))[0]
-        x0, y0, x1, y1 = (float(v) for v in comp["crop"].split(","))
-        w, h = cols[-1] - cols[0], rows_[-1] - rows_[0]
-        box = (round(cols[0] + x0 * w), round(rows_[0] + y0 * h),
-               round(cols[0] + x1 * w) + 1, round(rows_[0] + y1 * h) + 1)
+        host = evobc / comp["evobc_file"].split("_")[0] / comp["evobc_file"]
         name = f"U+{ord(ch):04X}.png"
-        crop = img.crop(box)
-        canvas = Image.new("L", (crop.width + 20, crop.height + 20), 255)
-        canvas.paste(crop, (10, 10))
-        canvas.save(png_dir / name)
+        crop_component(host, comp["crop"]).save(png_dir / name)
         rows.append([ch, f"U+{ord(ch):04X}", name, host.parent.name,
                      f"{host.name} (crop {comp['crop']} of {comp['host']})", 1])
     return rows
 
 
-def main():
-    if len(sys.argv) < 2:
-        sys.exit(__doc__)
-    stage = sys.argv[1]
-    evobc = Path(sys.argv[2]) if len(sys.argv) > 2 else EVOBC_DEFAULT
+def images_by_character(evobc, stage):
+    """
+    Every character EVOBC has at this stage, not just the poster's, so the
+    font is usable for other text too: character -> sorted image paths.
+    """
     keyvalue = json.loads((evobc / KEYVALUE_NAME).read_text(encoding="utf-8"))
     ids = {}
     for evobc_id, ch in keyvalue.items():
         ids.setdefault(ch, []).append(evobc_id)
-
-    out = Path("historical") / stage
-    png_dir = out / "png"
-    if png_dir.exists():
-        shutil.rmtree(png_dir)
-    png_dir.mkdir(parents=True)
-
-    # Every character EVOBC has at this stage, not just the poster's, so the
-    # font is usable for other text too
     by_char = {}
     for ch, evobc_ids in ids.items():
         if len(ch) != 1 or ord(ch) < 0x2E80:
@@ -134,7 +139,11 @@ def main():
         )
         if paths:
             by_char[ch] = paths
+    return by_char
 
+
+def select_medoids(by_char, png_dir):
+    """Copy each character's medoid image into png_dir; return the sources rows."""
     rows = []
     for n, ch in enumerate(sorted(by_char), 1):
         if n % 500 == 0:
@@ -145,7 +154,23 @@ def main():
         name = f"U+{ord(ch):04X}{chosen.suffix.lower()}"
         shutil.copy(chosen, png_dir / name)
         rows.append([ch, f"U+{ord(ch):04X}", name, chosen.parent.name, chosen.name, usable])
+    return rows
 
+
+def main():
+    """Select glyphs for the stage named on the command line."""
+    if len(sys.argv) < 2:
+        sys.exit(__doc__)
+    stage = sys.argv[1]
+    evobc = Path(sys.argv[2]) if len(sys.argv) > 2 else EVOBC_DEFAULT
+
+    out = Path("historical") / stage
+    png_dir = out / "png"
+    if png_dir.exists():
+        shutil.rmtree(png_dir)
+    png_dir.mkdir(parents=True)
+
+    rows = select_medoids(images_by_character(evobc, stage), png_dir)
     rows += borrowed_components(stage, evobc, png_dir, {r[0] for r in rows})
 
     with open(out / "sources.tsv", "w", encoding="utf-8", newline="") as fh:

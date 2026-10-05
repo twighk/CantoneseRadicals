@@ -31,7 +31,8 @@ def trace(png, svg):
     """Upscale, binarise (dark ink on light ground) and trace one glyph."""
     grey = Image.open(png).convert("L")
     scale = TRACE_SIZE / max(grey.size)
-    grey = grey.resize((round(grey.width * scale), round(grey.height * scale)), Image.LANCZOS)
+    grey = grey.resize((round(grey.width * scale), round(grey.height * scale)),
+                        Image.Resampling.LANCZOS)
     arr = np.asarray(grey, dtype=np.float32)
     lo, hi = np.percentile(arr, 2), np.percentile(arr, 98)
     ink = arr < (lo + hi) / 2
@@ -62,23 +63,14 @@ def charstring(svg, ascent=ASCENT, descent=DESCENT):
     return pen.getCharString()
 
 
-def main():
-    if len(sys.argv) != 4:
-        sys.exit(__doc__)
-    stage, family, output = sys.argv[1:]
-    src = Path("historical") / stage
-    svg_dir = Path("build/historical") / stage / "svg"   # traced outlines, regenerated from the PNGs
-    svg_dir.mkdir(parents=True, exist_ok=True)
+def glyph_name(codepoint):
+    """AGL-style glyph name for "U+XXXX" (uniXXXX) or "U+XXXXX" (uXXXXX)."""
+    hexcode = codepoint[2:]
+    return ("uni" if len(hexcode) == 4 else "u") + hexcode
 
-    rows = list(csv.DictReader(open(src / "sources.tsv", encoding="utf-8"), delimiter="\t"))
-    glyphs, cmap = {".notdef": None}, {}
-    for row in rows:
-        svg = svg_dir / (Path(row["file"]).stem + ".svg")
-        trace(src / "png" / row["file"], svg)
-        name = "uni" + row["codepoint"][2:] if len(row["codepoint"]) == 6 else "u" + row["codepoint"][2:]
-        glyphs[name] = charstring(svg)
-        cmap[ord(row["character"])] = name
 
+def save_font(glyphs, cmap, family, stage, output):
+    """Assemble the CFF OpenType font from the glyph charstrings and save it."""
     notdef = T2CharStringPen(UPM, None)
     glyphs[".notdef"] = notdef.getCharString()
 
@@ -99,9 +91,32 @@ def main():
         "description": f"Historical glyphs ({stage}) selected from the EVOBC dataset",
     })
     fb.setupOS2(sTypoAscender=ASCENT, sTypoDescender=DESCENT, usWinAscent=ASCENT,
-                usWinDescent=-DESCENT, ulCodePageRange1=(1 << 20))  # Chinese: Big5
+                usWinDescent=-DESCENT, ulCodePageRange1=1 << 20)  # Chinese: Big5
     fb.setupPost()
     fb.save(output)
+
+
+def main():
+    """Build the font for the stage named on the command line."""
+    if len(sys.argv) != 4:
+        sys.exit(__doc__)
+    stage, family, output = sys.argv[1:]
+    src = Path("historical") / stage
+    # Traced outlines are regenerated from the PNGs, so they live in build/
+    svg_dir = Path("build/historical") / stage / "svg"
+    svg_dir.mkdir(parents=True, exist_ok=True)
+
+    with open(src / "sources.tsv", encoding="utf-8") as fh:
+        rows = list(csv.DictReader(fh, delimiter="\t"))
+    glyphs, cmap = {".notdef": None}, {}
+    for row in rows:
+        svg = svg_dir / (Path(row["file"]).stem + ".svg")
+        trace(src / "png" / row["file"], svg)
+        name = glyph_name(row["codepoint"])
+        glyphs[name] = charstring(svg)
+        cmap[ord(row["character"])] = name
+
+    save_font(glyphs, cmap, family, stage, output)
     print(f"{family}: {len(cmap)} glyphs -> {output}")
 
 
