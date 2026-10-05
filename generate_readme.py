@@ -109,7 +109,7 @@ def main():
     lines.append("""
 # Cantonese Radicals
 
-A reference poster of the 214 Kangxi radicals with Cantonese romanization, typeset in various Hong Kong Chinese fonts.
+A reference poster of the 214 Kangxi radicals with Cantonese romanization, typeset in various Hong Kong Chinese fonts, plus experimental oracle bone and seal script fonts built from historical glyphs.
 
 ## Contents
 
@@ -174,6 +174,7 @@ make clean-all
 - XeLaTeX
 - Python 3
 - Hong Kong Chinese fonts
+- potrace (for the historical-script fonts)
 
 ## Sources
 
@@ -181,6 +182,9 @@ make clean-all
 - <https://www.cantoneseclass101.com/chinese-radicals/>
 - <https://en.wikipedia.org/wiki/Kangxi_radicals>
 - <https://github.com/twighk/CantoneseRadicals>
+- Oracle bone and seal script glyphs: EVOBC (Evolution of Oracle Bone Characters), Guan et al.,
+  <https://arxiv.org/abs/2401.12467>, <https://github.com/RomanticGodVAN/character-Evolution-Dataset>;
+  see [historical/README.md](historical/README.md) for how they were selected and their provenance
 """[1:-1])
 
     README_PATH.write_text("\n".join(lines), encoding="utf-8")
