@@ -99,12 +99,11 @@ def main():
 
     print(f"Found {len(pdfs)} PDFs")
 
-    # Generate previews
+    # Generate previews (always regenerate: strip index depends on position in the sorted list)
     for i, (romanisation, font_name, pdf_path) in enumerate(pdfs):
         clip_path = CLIP_DIR / f"{pdf_path.stem}.png"
-        if not clip_path.exists():
-            print(f"  Preview: {font_name} from {pdf_path.name}")
-            generate_preview(pdf_path, clip_path, i)
+        print(f"  Preview: {font_name} from {pdf_path.name}")
+        generate_preview(pdf_path, clip_path, i)
 
     lines = []
     lines.append("""
